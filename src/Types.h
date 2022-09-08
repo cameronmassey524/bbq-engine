@@ -5,6 +5,7 @@
 namespace bbq {
     typedef double real;
     typedef std::string string;
-    //class Engine;
-    //class GraphicsManager;
+    
+    class Engine;
+    class GraphicsManager;
 }
