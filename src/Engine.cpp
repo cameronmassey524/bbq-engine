@@ -12,31 +12,42 @@
 using namespace bbq;
 
 
-GraphicsManager graphics;
+//GraphicsManager graphics;
+//InputManager input;
 
 void Engine::Startup()
 {
     graphics.Startup();
+    input.Startup();
 }
 
 void Engine::Shutdown()
 {
     graphics.Shutdown();
+    input.Shutdown();
 }
 
-void Engine::RunGameLoop()
+void Engine::RunGameLoop(const UpdateCallback& callback)
 {
     //auto start_time = std::chrono::steady_clock::now();
     
     //int seconds_passed = 0;
     //int sixtieths = 0;
+    //double last_length = 0.0;
     
     while (true)
     //while (sixtieths<600)
     {
-        double start_time = glfwGetTime();
-        //sixtieths+=1;
-        //do game loop stuff
+        //double start_time = glfwGetTime();
+
+        input.Update();
+        callback(*this);
+
+        //graphics.Draw() (pseudo)
+
+
+        // sixtieths+=1;
+        // //do game loop stuff
         // if (sixtieths>=60)
         // {
         //     sixtieths = 0;
@@ -51,25 +62,23 @@ void Engine::RunGameLoop()
         // }
         
         //manage timestep 
-        
-        // std::chrono::steady_clock::duration time_span = std::chrono::steady_clock::now() - start_time;
-        
-        //double n_seconds = double(time_span.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
-        double end_time = glfwGetTime();
-        double time_diff = end_time-start_time;
-        //std::cout << (1.0/60.0) - time_diff; 
-        //std::cout << "\n";
-        const auto timestep = std::chrono::duration<real>( (1.0/60.0) - time_diff);
+        //double end_time = glfwGetTime();
+        //double time_diff = end_time-start_time;
+
+        //const auto timestep = std::chrono::duration<real>( ((1.0/60.0) - (end_time-start_time)) );
+        //const auto timestep = std::chrono::duration<real>( ((1.0/60.0) - (last_length - (1.0/60.0))) );
+        const auto timestep = std::chrono::duration<real>( 1.0/60.0 );
         
         
         
         std::this_thread::sleep_for(timestep);
-        //std::cout << time_diff = "\n";
-        
-        
 
+        //last_length = glfwGetTime() - start_time;
 
+        //std::cout << ((1.0/60.0) - (end_time-start_time) - (last_length - (1./60.)));
+        //std::cout << last_length;
+        //std::cout << "\n";
     }
     //std::cout << "Loop exited after 10 seconds\n";
 }

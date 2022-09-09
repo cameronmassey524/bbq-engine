@@ -9,5 +9,7 @@ namespace bbq
         public:
             void Startup();
             void Shutdown();
+            void Update();
+            bool KeyIsPressed(int key_name);
     };
 }

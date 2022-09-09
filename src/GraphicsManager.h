@@ -12,6 +12,7 @@ namespace bbq
         public:
             void Startup();
             void Shutdown();
+            bool ShouldQuit();
 
 
     };

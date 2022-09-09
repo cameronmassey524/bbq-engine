@@ -32,10 +32,19 @@ void GraphicsManager::Startup()
         glfwTerminate();
     }
     glfwMakeContextCurrent( (GLFWwindow*) this->window );
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 }
 
 void GraphicsManager::Shutdown()
 {
     //does nothing right now
+}
+
+bool GraphicsManager::ShouldQuit()
+{
+    if (glfwWindowShouldClose((GLFWwindow*)this->window))
+    {
+        return true;
+    }
+    return false;
 }

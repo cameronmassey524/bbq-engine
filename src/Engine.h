@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsManager.h"
+#include "InputManager.h"
 #include "Types.h"
 
 namespace bbq
@@ -9,12 +10,12 @@ namespace bbq
     {
         public:
             GraphicsManager graphics;
-            //InputManager input;
+            InputManager input;
 
             void Startup();
 
             void Shutdown();
 
-            void RunGameLoop();
+            void RunGameLoop(const UpdateCallback& callback);
     };
 }

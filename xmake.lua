@@ -22,4 +22,4 @@ target("bbqengine")
     add_files("src/*.cpp")
 
     --add packages
-    add_packages("glfw")
+    add_packages("glfw", {public = true})
