@@ -2,6 +2,10 @@ add_rules("mode.debug", "mode.release")
 
 add_requires("glfw")
 
+includes("external/xmake_soloud.lua")
+
+add_requires("soloud")
+
 target("helloworld")
     set_kind("binary")
     set_languages("cxx17")
@@ -9,6 +13,12 @@ target("helloworld")
     add_deps("bbqengine")
     
     add_files("demo/helloworld.cpp")
+
+    -- Copy assets
+    after_build(function (target)
+        cprint("Copying assets")
+        os.cp("$(projectdir)/assets", path.directory(target:targetfile()))
+    end)
 
 target("bbqengine")
     set_kind("static")
@@ -23,3 +33,4 @@ target("bbqengine")
 
     --add packages
     add_packages("glfw", {public = true})
+    add_packages("soloud", {public = true})
