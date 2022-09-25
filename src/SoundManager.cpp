@@ -1,5 +1,6 @@
 #include "SoundManager.h"
 #include "soloud.h"
+#include "soloud_wav.h"
 #include <string>
 
 using namespace bbq;
@@ -8,27 +9,36 @@ class SoundManager::SoundManagerImpl
 {
 
     private:
-        SoLoud::Soloud soloud;
-        SoLoud::Wav sample;
+
 
     public:
-
+        SoLoud::Soloud soloud;
+        SoLoud::Wav sample;
 
 };
 
 void SoundManager::Startup()
 {
-    this.soloud.init();
+    mSoundManager->soloud.init();
 }
 
 void SoundManager::Shutdown()
 {
-    this.soloud.deinit();
+    mSoundManager->soloud.deinit();
 }
 
-bool SoundManager::LoadSound( const string& name, const string& path )
+bool SoundManager::LoadSound( const std::string& name, const std::string& path )
 {
     return false;
 }
 
+SoundManager::SoundManager()
+{
+    mSoundManager = std::make_unique<SoundManagerImpl>();
+}
+
+SoundManager::~SoundManager()
+{
+    //idk?
+}
 

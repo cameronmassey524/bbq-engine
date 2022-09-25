@@ -8,17 +8,18 @@ namespace bbq
 {
     class SoundManager
     {
-        private:
-            //SoLoud::Soloud soloud;
-            //SoLoud::Wav sample;
-            class SoundManagerImpl;
-            std::unique_ptr<SoundManagerImpl> mSoundManager;
+
         public:
             SoundManager();
             ~SoundManager();
             void Startup();
             void Shutdown();
-            bool LoadSound( const string& name, const string& path);
+            bool LoadSound( const std::string& name, const std::string& path);
 
+        private:
+            //SoLoud::Soloud soloud;
+            //SoLoud::Wav sample;
+            class SoundManagerImpl;
+            std::unique_ptr<SoundManagerImpl> mSoundManager;
     };
 }
