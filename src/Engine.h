@@ -2,6 +2,8 @@
 
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
+#include "ResourceManager.h"
 #include "Types.h"
 
 namespace bbq
@@ -11,6 +13,7 @@ namespace bbq
         public:
             GraphicsManager graphics;
             InputManager input;
+            SoundManager sound;
 
             void Startup();
 

@@ -1,5 +1,7 @@
 #include "Engine.h"
 #include "GraphicsManager.h"
+#include "SoundManager.h"
+#include "ResourceManager.h"
 #include "Types.h"
 #include <thread>
 #include <chrono>
@@ -19,12 +21,14 @@ void Engine::Startup()
 {
     graphics.Startup();
     input.Startup();
+    sound.Startup();
 }
 
 void Engine::Shutdown()
 {
     graphics.Shutdown();
     input.Shutdown();
+    sound.Shutdown();
 }
 
 void Engine::RunGameLoop(const UpdateCallback& callback)

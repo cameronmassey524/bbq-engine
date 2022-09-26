@@ -21,15 +21,17 @@ void test_callback(Engine& e)
     if (game.input.KeyIsPressed(GLFW_KEY_SPACE))
     {
         std::cout << "Space is pressed. \n";
+        game.sound.PlaySound();
     }
 }
 
 int main( int argc, const char* argv[] ) {
     //std::cout << "Hello, World!\n";
-    std::cout << "Hello World!\nPress space to receive a message.\nPress the X in the graphics window to quit.\n";
+    std::cout << "Hello World!\nPress space to play a sound.\nPress the X in the graphics window to quit.\n";
 
     // Engine game;
     game.Startup();
+    game.sound.LoadSound("hitsound.wav","assets/sounds/");
     game.RunGameLoop(test_callback);
 
     return 0;
