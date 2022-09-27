@@ -19,6 +19,7 @@ using namespace bbq;
 
 void Engine::Startup()
 {
+    //graphics = GraphicsManager();
     graphics.Startup();
     input.Startup();
     sound.Startup();

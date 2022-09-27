@@ -6,6 +6,12 @@ includes("external/xmake_soloud.lua")
 
 add_requires("soloud")
 
+add_requires("sokol")
+
+add_requires("glm")
+
+add_requires("stb")
+
 target("helloworld")
     set_kind("binary")
     set_languages("cxx17")
@@ -34,3 +40,6 @@ target("bbqengine")
     --add packages
     add_packages("glfw", {public = true})
     add_packages("soloud", {public = true})
+    add_packages("sokol")
+    add_packages("glm", {public = true})
+    add_packages("stb")
