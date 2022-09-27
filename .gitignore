@@ -1,6 +1,7 @@
 # Xmake
 /build
 /.xmake
+./vscode
 
 # macOS
 .DS_Store
