@@ -30,7 +30,7 @@ void test_callback(Engine& e)
 
 int main( int argc, const char* argv[] ) {
     //std::cout << "Hello, World!\n";
-    std::cout << "Hello World!\nPress space to play a sound.\nPress the X in the graphics window to quit.\n";
+    std::cout << "Hello World!\nPress space to play a sound and show a cool image.\nPress the X in the graphics window to quit.\n";
 
     // Engine game;
     game.Startup();

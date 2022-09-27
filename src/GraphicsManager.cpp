@@ -53,6 +53,7 @@ class GraphicsManager::GraphicsManagerImpl
         sg_bindings bindings;
         sg_pass_action pass_action;
         //std::vector< Sprite > sprites;
+        sg_image sample_image;
 
 };
 
@@ -193,22 +194,25 @@ void GraphicsManager::Startup()
 
     //Step 13: make shader program, add to pipeline, then make entire pipeline
     pipeline_desc.shader = sg_make_shader( shader_desc );
-    sg_pipeline pipeline = sg_make_pipeline( pipeline_desc );
-    mGraphicsManager->pipeline = pipeline; //update instance var
+    //sg_pipeline pipeline = sg_make_pipeline( pipeline_desc );
+    mGraphicsManager->pipeline = sg_make_pipeline( pipeline_desc );
+    //mGraphicsManager->pipeline = pipeline; //update instance var
 
     //Step 14: Create sg_pass_action struct, choose clear color.
     //tells sokol_gfx what to do with whatevers in the frame buffer already
     //when start drawing a frame.
     sg_pass_action pass_action{};
-    pass_action.colors[0].action = SG_ACTION_CLEAR;
-    pass_action.colors[0].value = { /* red, green, blue, alpha floating point values for a color to fill the frame buffer with */ };
-    mGraphicsManager->pass_action = pass_action; //update instance var
+    mGraphicsManager->pass_action = pass_action;
+    mGraphicsManager->pass_action.colors[0].action = SG_ACTION_CLEAR;
+    mGraphicsManager->pass_action.colors[0].value = { /* red, green, blue, alpha floating point values for a color to fill the frame buffer with */ };
+    //mGraphicsManager->pass_action = pass_action; //update instance var
 
     //step 15: "bind" our vertex_buffer data to our pipeline
     //for each draw call in an sg_bindings struct:
     sg_bindings bindings{};
-    bindings.vertex_buffers[0] = vertex_buffer;
     mGraphicsManager->bindings = bindings; //update instance vars
+    mGraphicsManager->bindings.vertex_buffers[0] = vertex_buffer;
+    
 
 }
 
@@ -254,13 +258,16 @@ bool GraphicsManager::LoadAnImage(const std::string& name, const std::string& pa
     //upload image to GPU
     sg_image image = sg_make_image( image_desc );
 
+    //added
+    mGraphicsManager->sample_image = image;
+
     //Free date returned by stbi_load() since we are done with it
     stbi_image_free( data );
 
     //add sprite informatino to sprite vector
     Sprite s;
     s.image = name;
-    s.scale = 1.0;
+    s.scale = 100.0;
     s.position = glm::vec2(0.f, 0.f);
     s.z = 1.0;
     //mGraphicsManager->sprites.insert(mGraphicsManager->sprites.begin(),s);
@@ -319,7 +326,7 @@ void GraphicsManager::Draw(const std::vector< Sprite >& sprites)
         sg_apply_uniforms( SG_SHADERSTAGE_FS, 0, SG_RANGE(uniforms) );
 
         //step ii:
-        mGraphicsManager->bindings.fs_images[0];
+        mGraphicsManager->bindings.fs_images[0] = mGraphicsManager->sample_image;
         sg_apply_bindings(mGraphicsManager->bindings);
 
         //step iii:
