@@ -20,6 +20,7 @@ using namespace bbq;
 void Engine::Startup()
 {
     //graphics = GraphicsManager();
+    ecs.Startup();
     graphics.Startup();
     input.Startup();
     sound.Startup();
@@ -27,6 +28,7 @@ void Engine::Startup()
 
 void Engine::Shutdown()
 {
+    ecs.Shutdown();
     graphics.Shutdown();
     input.Shutdown();
     sound.Shutdown();
@@ -48,7 +50,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         input.Update();
         callback(*this);
 
-        //graphics.Draw() (pseudo)
+        graphics.Draw();
 
 
         // sixtieths+=1;

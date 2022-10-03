@@ -1,5 +1,7 @@
 #include "GraphicsManager.h"
 #include "Types.h"
+#include "Engine.h"
+#include "EntityManager.h"
 
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
@@ -40,6 +42,7 @@ struct Uniforms {
 
 using namespace bbq;
 extern std::vector<Sprite> sprites;
+extern Engine game;
 
 class GraphicsManager::GraphicsManagerImpl
 {
@@ -272,12 +275,14 @@ bool GraphicsManager::LoadAnImage(const std::string& name, const std::string& pa
     s.z = 1.0;
     //mGraphicsManager->sprites.insert(mGraphicsManager->sprites.begin(),s);
     //mGraphicsManager->sprites.push_back(s);
+
     sprites.push_back(s);
     
     return false; //default
 }
 
-void GraphicsManager::Draw(const std::vector< Sprite >& sprites)
+//void GraphicsManager::Draw(const std::vector< Sprite >& sprites)
+void GraphicsManager::Draw()
 {
     //Step 1: Get current frame buffer size
     int width, height;
@@ -310,8 +315,12 @@ void GraphicsManager::Draw(const std::vector< Sprite >& sprites)
     //uniforms.transform = translate( mat4{1}, vec3( position, z ) ) * scale( mat4{1}, vec3( scale ) );
 
     //Step 5: Draw Each Sprite
-    for (Sprite s : sprites)
+    std::unordered_map ss = game.ecs.GetAppropriateSparseSet<Sprite>();
+    //for( const auto& [entity, s] : ss )
+    //for (Sprite s : sprites)
+    game.ecs.ForEach<Sprite>( [&]( EntityID e )
     {
+        Sprite& s = game.ecs.Get<Sprite>(e);
         //step i:
         uniforms.transform = translate( mat4{1}, vec3( s.position, s.z ) ) * scale( mat4{1}, vec3( s.scale ) );
 
@@ -331,7 +340,7 @@ void GraphicsManager::Draw(const std::vector< Sprite >& sprites)
 
         //step iii:
         sg_draw(0, 4, 1);
-    }
+    } );
 
 
     //Step 6: finish drawing

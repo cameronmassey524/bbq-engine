@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Engine.h"
 #include "GraphicsManager.h"
+//#include "Types.h"
 
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
@@ -24,7 +25,28 @@ void test_callback(Engine& e)
     {
         std::cout << "Space is pressed. \n";
         game.sound.PlaySound();
-        game.graphics.Draw(sprites);
+        //game.graphics.Draw();
+        
+        //make entity with sprite "rangercat.png"
+        Position myPos;
+        //myPos.x=0;
+        //myPos.y=0;
+        Velocity myVel;
+        //myVel.x=0;
+        //myVel.y=0;
+        Gravity myGrav;
+        //myGrav.meters_per_second = 0;
+        Health myHealth;
+        //myHealth.percent = 100;
+        Script myScript;
+        //myScript.name = "none(placeholder)";
+        Sprite mySprite = sprites[0];
+        mySprite.scale = 1 + std::rand() % 100;
+        //done making entity components. (currently all required)
+        
+        game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+        
+
     }
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "Types.h"
+//#include "Engine.h"
+#include "EntityManager.h"
 #include <memory>
 #include <string>
 
@@ -20,7 +22,8 @@ namespace bbq
             void Startup();
             void Shutdown();
             bool ShouldQuit();
-            void Draw(const std::vector< Sprite >& sprites);
+            //void Draw(const std::vector< Sprite >& sprites);
+            void Draw();
             bool LoadAnImage(const std::string& name, const std::string& path);
             void* GetWindow();
 

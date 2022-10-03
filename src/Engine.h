@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "ResourceManager.h"
+#include "EntityManager.h"
 #include "Types.h"
 
 namespace bbq
@@ -14,6 +15,7 @@ namespace bbq
             GraphicsManager graphics;
             InputManager input;
             SoundManager sound;
+            EntityManager ecs;
 
             void Startup();
 
