@@ -12,6 +12,10 @@ add_requires("glm")
 
 add_requires("stb")
 
+add_requires("lua", "sol2")
+
+
+
 target("helloworld")
     set_kind("binary")
     set_languages("cxx17")
@@ -43,3 +47,5 @@ target("bbqengine")
     add_packages("sokol")
     add_packages("glm", {public = true})
     add_packages("stb")
+    add_packages("lua")
+    add_packages("sol2", {public = true})

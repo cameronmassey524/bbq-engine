@@ -276,7 +276,8 @@ bool GraphicsManager::LoadAnImage(const std::string& name, const std::string& pa
     //mGraphicsManager->sprites.insert(mGraphicsManager->sprites.begin(),s);
     //mGraphicsManager->sprites.push_back(s);
 
-    sprites.push_back(s);
+    //sprites.push_back(s);
+    game.resources.AddSprite(s);
     
     return false; //default
 }

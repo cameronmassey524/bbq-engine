@@ -13,10 +13,12 @@ namespace bbq {
     class InputManager;
 
     class SoundManager;
+    class ScriptManager;
     //class GraphicsManager::GraphicsManagerImpl;
 
     typedef std::function<void(Engine&)> UpdateCallback;
     typedef glm::vec2 vec2;
+    typedef glm::vec3 vec3;
 
     
 

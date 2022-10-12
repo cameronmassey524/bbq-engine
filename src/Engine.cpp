@@ -1,7 +1,7 @@
 #include "Engine.h"
-#include "GraphicsManager.h"
-#include "SoundManager.h"
-#include "ResourceManager.h"
+//#include "GraphicsManager.h"
+//#include "SoundManager.h"
+//#include "ResourceManager.h"
 #include "Types.h"
 #include <thread>
 #include <chrono>
@@ -24,6 +24,9 @@ void Engine::Startup()
     graphics.Startup();
     input.Startup();
     sound.Startup();
+    resources.Startup();
+    scripting.Startup();
+
 }
 
 void Engine::Shutdown()
@@ -32,6 +35,8 @@ void Engine::Shutdown()
     graphics.Shutdown();
     input.Shutdown();
     sound.Shutdown();
+    resources.Shutdown();
+    scripting.Shutdown();
 }
 
 void Engine::RunGameLoop(const UpdateCallback& callback)

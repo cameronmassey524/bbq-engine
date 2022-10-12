@@ -16,6 +16,7 @@ namespace bbq
             void Shutdown();
             bool LoadSound( const std::string& name, const std::string& path);
             void PlaySound();
+            void PlaySound(std::string name);
 
         private:
             //SoLoud::Soloud soloud;

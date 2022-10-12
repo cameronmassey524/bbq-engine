@@ -10,7 +10,7 @@ using namespace bbq;
 
 Engine game; //global engine
 
-std::vector< Sprite > sprites; //global sprites for now
+//std::vector< Sprite > sprites; //global sprites for now
 
 void test_callback(Engine& e)
 {
@@ -24,7 +24,7 @@ void test_callback(Engine& e)
     if (game.input.KeyIsPressed(GLFW_KEY_SPACE))
     {
         std::cout << "Space is pressed. \n";
-        game.sound.PlaySound();
+        game.sound.PlaySound("hitsound.wav");
         //game.graphics.Draw();
         
         //make entity with sprite "rangercat.png"
@@ -40,7 +40,7 @@ void test_callback(Engine& e)
         //myHealth.percent = 100;
         Script myScript;
         //myScript.name = "none(placeholder)";
-        Sprite mySprite = sprites[0];
+        Sprite mySprite = game.resources.GetSprite("rangercat.png");
         mySprite.scale = 1 + std::rand() % 100;
         //done making entity components. (currently all required)
         
