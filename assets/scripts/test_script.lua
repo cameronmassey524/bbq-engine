@@ -1,0 +1,2 @@
+PlaySound("hitsound.wav");
+

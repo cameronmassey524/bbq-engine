@@ -55,6 +55,8 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         input.Update();
         callback(*this);
 
+        scripting.Update();
+        
         graphics.Draw();
 
 

@@ -23,28 +23,21 @@ void test_callback(Engine& e)
     
     if (game.input.KeyIsPressed(GLFW_KEY_SPACE))
     {
-        std::cout << "Space is pressed. \n";
-        game.sound.PlaySound("hitsound.wav");
-        //game.graphics.Draw();
-        
-        //make entity with sprite "rangercat.png"
-        Position myPos;
-        //myPos.x=0;
-        //myPos.y=0;
-        Velocity myVel;
-        //myVel.x=0;
-        //myVel.y=0;
-        Gravity myGrav;
-        //myGrav.meters_per_second = 0;
-        Health myHealth;
-        //myHealth.percent = 100;
-        Script myScript;
-        //myScript.name = "none(placeholder)";
-        Sprite mySprite = game.resources.GetSprite("rangercat.png");
-        mySprite.scale = 1 + std::rand() % 100;
-        //done making entity components. (currently all required)
-        
-        game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+        // std::cout << "Space is pressed. \n";
+        // //game.sound.PlaySound("hitsound.wav");
+        // game.scripting.RunScript("test_script.lua");
+        // //make entity with sprite "rangercat.png"
+        // Position myPos;
+        // Velocity myVel;
+        // Gravity myGrav;
+        // Health myHealth;
+        // Script myScript;
+        // Sprite mySprite = game.resources.GetSprite("rangercat.png"); // mySprite becomes a copy of the sprite at location
+        // mySprite.scale = 1 + std::rand() % 100;
+        // //done making entity components. (currently all required)
+        // game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+
+        game.scripting.RunScript("spacebar_script.lua");
         
 
     }
@@ -59,6 +52,25 @@ int main( int argc, const char* argv[] ) {
     game.sound.LoadSound("hitsound.wav","assets/sounds/");
     
     game.graphics.LoadAnImage("rangercat.png", "assets/sprites/");
+
+    game.scripting.LoadScript("test_script.lua", "assets/scripts/");
+    game.scripting.LoadScript("spacebar_script.lua", "assets/scripts/");
+    game.scripting.LoadScript("scroll_x.lua", "assets/scripts/");
+
+
+    //make entity with sprite "rangercat.png"
+    Position myPos;
+    Velocity myVel;
+    Gravity myGrav;
+    Health myHealth;
+    Script myScript;
+    myScript.name = "scroll_x.lua";
+    Sprite mySprite = game.resources.GetSprite("rangercat.png"); // mySprite becomes a copy of the sprite at location
+    mySprite.scale = 1 + std::rand() % 100;
+    //done making entity components. (currently all required)
+    EntityID myEntity = game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+
+    //game.ecs.Get<Sprite>(myEntity).position.x = 50;
 
 
     game.RunGameLoop(test_callback);

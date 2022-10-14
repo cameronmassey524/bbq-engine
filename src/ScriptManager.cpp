@@ -1,6 +1,11 @@
+//#pragma once
 #include "ScriptManager.h"
 #include "Types.h"
 #include "Engine.h"
+#include <iostream>
+
+#define SOL_ALL_SAFETIES_ON 1
+#include <sol/sol.hpp>
 
 using namespace bbq;
 
@@ -89,12 +94,25 @@ void ScriptManager::Startup()
 
     lua.set_function( "CreateEntity", [&]( Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp ) { return game.ecs.Create( pos, vel, grav, health, sc, sp ); } );
     lua.set_function( "DestroyEntity", [&]( const EntityID entity ) { return game.ecs.Destroy( entity ); } );
-    lua.set_function( "GetSprite", [&]( const EntityID entity ) { return game.ecs.Get<Sprite>( entity ); } );
-    lua.set_function( "GetPosition", [&]( const EntityID entity ) { return game.ecs.Get<Position>( entity ); } );
-    lua.set_function( "GetVelocity", [&]( const EntityID entity ) { return game.ecs.Get<Velocity>( entity ); } );
-    lua.set_function( "GetGravity", [&]( const EntityID entity ) { return game.ecs.Get<Gravity>( entity ); } );
-    lua.set_function( "GetScript", [&]( const EntityID entity ) { return game.ecs.Get<Script>( entity ); } );
-    lua.set_function( "GetHealth", [&]( const EntityID entity ) { return game.ecs.Get<Health>( entity ); } );
+
+    //Old functions
+    //lua.set_function( "GetSprite", [&]( const EntityID entity ) { return game.ecs.Get<Sprite>( entity ); } );
+    //lua.set_function( "GetPosition", [&]( const EntityID entity ) { return game.ecs.Get<Position>( entity ); } );
+    //lua.set_function( "GetVelocity", [&]( const EntityID entity ) { return game.ecs.Get<Velocity>( entity ); } );
+    //lua.set_function( "GetGravity", [&]( const EntityID entity ) { return game.ecs.Get<Gravity>( entity ); } );
+    //lua.set_function( "GetScript", [&]( const EntityID entity ) { return game.ecs.Get<Script>( entity ); } );
+    //lua.set_function( "GetHealth", [&]( const EntityID entity ) { return game.ecs.Get<Health>( entity ); } );
+
+    lua.set_function( "GetSprite", [&]( const EntityID e ) -> Sprite& { return game.ecs.Get<Sprite>(e); } );
+    lua.set_function( "GetPosition", [&]( const EntityID e ) -> Position& { return game.ecs.Get<Position>(e); } );
+    lua.set_function( "GetVelocity", [&]( const EntityID e ) -> Velocity& { return game.ecs.Get<Velocity>(e); } );
+    lua.set_function( "GetGravity", [&]( const EntityID e ) -> Gravity& { return game.ecs.Get<Gravity>(e); } );
+    lua.set_function( "GetScript", [&]( const EntityID e ) -> Script& { return game.ecs.Get<Script>(e); } );
+    lua.set_function( "GetHealth", [&]( const EntityID e ) -> Health& { return game.ecs.Get<Health>(e); } );
+
+    
+
+    lua.set_function( "GetSpriteResource", [&]( const std::string name) { return game.resources.GetSprite( name ); } );
 }
 
 void ScriptManager::Shutdown()
@@ -104,12 +122,43 @@ void ScriptManager::Shutdown()
 
 void ScriptManager::Update()
 {
-
+    game.ecs.ForEach<Script>( [&]( EntityID e )
+    {
+        Script& s = game.ecs.Get<Script>(e);
+        //game.scripting.RunScript(e);
+        script_load_map[s.name](e);
+    } );
 }
 
 bool ScriptManager::LoadScript( const string& name, const string& path)
 {
     string fullpath = path + name;
-    sol::load_result script = lua.load_file(fullpath);
-    return false; //default for now
+    //sol::load_result script = lua.load_file(fullpath);
+    script_load_map[name] = lua.load_file(fullpath);
+    
+    
+    auto f = lua.load_file(fullpath);
+
+    // if( !f.valid() ) {
+    //     std::cerr << "Failed to load script: " << sol::error(f).what() << std::endl;
+    //     return false;
+	// }
+
+	if (!f.valid()) {
+		sol::error err = f;
+		std::cerr << "failed to load string-based script into the program" << err.what() << std::endl;
+	}
+
+    return true; //default for now
+}
+
+void ScriptManager::RunScript(string name)
+{
+    //std::cout << "RunscriptEnteredNotice\n";
+    script_load_map[name]();
+}
+
+void ScriptManager::RunEntityScript(EntityID e)
+{
+    //script_load_map[name]();
 }
