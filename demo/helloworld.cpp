@@ -52,10 +52,14 @@ int main( int argc, const char* argv[] ) {
     game.sound.LoadSound("hitsound.wav","assets/sounds/");
     
     game.graphics.LoadAnImage("rangercat.png", "assets/sprites/");
+    game.graphics.LoadAnImage("cow.png", "assets/sprites/");
+    game.graphics.LoadAnImage("beam.png", "assets/sprites/");
+    game.graphics.LoadAnImage("ufo.png", "assets/sprites/");
 
     game.scripting.LoadScript("test_script.lua", "assets/scripts/");
     game.scripting.LoadScript("spacebar_script.lua", "assets/scripts/");
     game.scripting.LoadScript("scroll_x.lua", "assets/scripts/");
+    game.scripting.LoadScript("shrink_sprite.lua", "assets/scripts/");
 
 
     //make entity with sprite "rangercat.png"
@@ -64,7 +68,8 @@ int main( int argc, const char* argv[] ) {
     Gravity myGrav;
     Health myHealth;
     Script myScript;
-    myScript.name = "scroll_x.lua";
+    //myScript.name = "scroll_x.lua";
+    myScript.name = "shrink_sprite.lua";
     Sprite mySprite = game.resources.GetSprite("rangercat.png"); // mySprite becomes a copy of the sprite at location
     mySprite.scale = 1 + std::rand() % 100;
     //done making entity components. (currently all required)

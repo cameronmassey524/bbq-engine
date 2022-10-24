@@ -18,7 +18,7 @@
 
 #include <string>
 #include <iostream>
-
+#include <unordered_map>
 
 
 using namespace glm;
@@ -57,6 +57,7 @@ class GraphicsManager::GraphicsManagerImpl
         sg_pass_action pass_action;
         //std::vector< Sprite > sprites;
         sg_image sample_image;
+        std::unordered_map<string, sg_image> sokol_image_map;
 
 };
 
@@ -263,6 +264,7 @@ bool GraphicsManager::LoadAnImage(const std::string& name, const std::string& pa
 
     //added
     mGraphicsManager->sample_image = image;
+    mGraphicsManager->sokol_image_map[name] = image;
 
     //Free date returned by stbi_load() since we are done with it
     stbi_image_free( data );
@@ -336,7 +338,8 @@ void GraphicsManager::Draw()
         sg_apply_uniforms( SG_SHADERSTAGE_FS, 0, SG_RANGE(uniforms) );
 
         //step ii:
-        mGraphicsManager->bindings.fs_images[0] = mGraphicsManager->sample_image;
+        //mGraphicsManager->bindings.fs_images[0] = mGraphicsManager->sample_image;
+        mGraphicsManager->bindings.fs_images[0] = mGraphicsManager->sokol_image_map[s.image];
         sg_apply_bindings(mGraphicsManager->bindings);
 
         //step iii:

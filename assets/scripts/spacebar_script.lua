@@ -14,8 +14,24 @@ then
     myHealth = Health.new()
     --myHealth.percent = 100;
     myScript = Script.new()
-    myScript.name = "scroll_x.lua";
-    mySprite = GetSpriteResource("rangercat.png")
+    --myScript.name = "scroll_x.lua";
+    myScript.name = "shrink_sprite.lua";
+    randInt = math.random(1,4)
+    if (randInt==1) then
+        randSprite = GetSpriteResource("cow.png")
+        --print("1")
+    elseif (randInt==2) then
+        randSprite = GetSpriteResource("beam.png")
+        --print("2")
+    elseif (randInt==3) then
+        randSprite = GetSpriteResource("ufo.png")
+        --print("3")
+    else
+        randSprite = GetSpriteResource("rangercat.png") 
+        --print("4")
+    end
+    --mySprite = GetSpriteResource("rangercat.png")
+    mySprite = randSprite
     --mySprite.scale = 1 + std::rand() % 100
     mySprite.scale = math.random(1,100)
     --mySprite.scale = 10

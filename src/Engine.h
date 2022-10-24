@@ -25,5 +25,7 @@ namespace bbq
             void Shutdown();
 
             void RunGameLoop(const UpdateCallback& callback);
+
+            void preciseSleep(double seconds);
     };
 }
