@@ -325,8 +325,11 @@ void GraphicsManager::Draw()
     {
         Sprite& s = game.ecs.Get<Sprite>(e);
         //step i:
-        uniforms.transform = translate( mat4{1}, vec3( s.position, s.z ) ) * scale( mat4{1}, vec3( s.scale ) );
-
+        Position global_position;
+        global_position.x = game.ecs.Get<Position>(e).x + s.position.x;
+        global_position.y = game.ecs.Get<Position>(e).y + s.position.y;
+        //uniforms.transform = translate( mat4{1}, vec3( s.position, s.z ) ) * scale( mat4{1}, vec3( s.scale ) );
+        uniforms.transform = translate( mat4{1}, vec3( global_position.x, global_position.y, s.z ) ) * scale( mat4{1}, vec3( s.scale ) );
         //scale quad down to fit inside square always
         // if( image_width < image_height ) {
         //     uniforms.transform = uniforms.transform * scale( mat4{1}, vec3( real(image_width)/image_height, 1.0, 1.0 ) );

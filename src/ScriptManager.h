@@ -23,7 +23,8 @@ namespace bbq
             void Shutdown();
             void Update();
             bool LoadScript( const string& name, const string& path);
-            void RunScript(string name);
+            //void RunScript(string name);
+            void RunScript(string name, string args[]);
             void RunEntityScript(EntityID e);
     };
 }

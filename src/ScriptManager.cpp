@@ -152,7 +152,7 @@ bool ScriptManager::LoadScript( const string& name, const string& path)
     return true; //default for now
 }
 
-void ScriptManager::RunScript(string name)
+void ScriptManager::RunScript(string name, string args[])
 {
     //std::cout << "RunscriptEnteredNotice\n";
     script_load_map[name]();

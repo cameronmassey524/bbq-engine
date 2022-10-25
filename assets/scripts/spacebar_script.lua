@@ -14,8 +14,8 @@ then
     myHealth = Health.new()
     --myHealth.percent = 100;
     myScript = Script.new()
-    --myScript.name = "scroll_x.lua";
-    myScript.name = "shrink_sprite.lua";
+    myScript.name = "scroll_x.lua";
+    --myScript.name = "shrink_sprite.lua";
     randInt = math.random(1,4)
     if (randInt==1) then
         randSprite = GetSpriteResource("cow.png")

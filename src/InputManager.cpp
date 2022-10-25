@@ -28,7 +28,6 @@ void InputManager::Update()
 
 bool InputManager::KeyIsPressed(int key_name)
 {
-    //does nothing right now
     //int test = glfwGetKey((GLFWwindow*) game.graphics.window, key_name);
     int test = glfwGetKey((GLFWwindow*) game.graphics.GetWindow(), key_name);
     if (test == GLFW_PRESS)
