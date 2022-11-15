@@ -79,6 +79,46 @@ namespace bbq
                 return CurrentID;
             }
 
+            EntityID Create()
+            {
+                //currently requires user to specify all components. Thus foreach will just iterate all maps.
+                //Not going to worry about re-using entities IDs or wrapping past 2^64 (or 2^32) # entities
+                static EntityID CurrentID = -1;
+                CurrentID+=1;
+
+                Position pos;
+                pos.y = 0;
+                pos.x = 0;
+                Velocity vel;
+                Gravity grav;
+                Health health;
+                Script script;
+                //myScript.name = "scroll_x.lua";
+                //myScript.name = "shrink_sprite.lua";
+                //myScript.name = "ufo.lua";
+                //Sprite mySprite = game.resources.GetSprite("ufo.png"); // mySprite becomes a copy of the sprite at location
+                //mySprite.scale = 1 + std::rand() % 100;
+                Sprite sprite;
+                //mySprite.scale = 10;
+                //mySprite.z = 0.1;
+
+                
+                GetAppropriateSparseSet<Position>().insert({CurrentID, pos});
+                GetAppropriateSparseSet<Velocity>().insert({CurrentID, vel});
+                GetAppropriateSparseSet<Gravity>().insert({CurrentID, grav});
+                GetAppropriateSparseSet<Health>().insert({CurrentID, health});
+                GetAppropriateSparseSet<Script>().insert({CurrentID, script});
+                GetAppropriateSparseSet<Sprite>().insert({CurrentID, sprite});
+                // Get<Position>(CurrentID) = pos;
+                // Get<Velocity>(CurrentID) = vel;
+                // Get<Gravity>(CurrentID) = grav;
+                // Get<Health>(CurrentID) = health;
+                // Get<Script>(CurrentID) = sc;
+                // Get<Sprite>(CurrentID) = sp;
+
+                return CurrentID;
+            }
+
             // Returns true if the entity has all types.
             template <typename T, typename... Rest>
             bool HasAll( EntityID entity ) {

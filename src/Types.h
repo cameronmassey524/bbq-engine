@@ -32,6 +32,7 @@ namespace bbq {
     //struct Sprite { string image; real size; };
     struct Health { real percent; };
     struct Script { string name; };
+    struct Collider {real x, y;};
 
     typedef long EntityID;
 
