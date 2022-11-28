@@ -318,7 +318,7 @@ void GraphicsManager::Draw()
     //uniforms.transform = translate( mat4{1}, vec3( position, z ) ) * scale( mat4{1}, vec3( scale ) );
 
     //Step 5: Draw Each Sprite
-    std::unordered_map ss = game.ecs.GetAppropriateSparseSet<Sprite>();
+    //std::unordered_map ss = game.ecs.GetAppropriateSparseSet<Sprite>();
     //for( const auto& [entity, s] : ss )
     //for (Sprite s : sprites)
     game.ecs.ForEach<Sprite>( [&]( EntityID e )

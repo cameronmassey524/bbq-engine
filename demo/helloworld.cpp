@@ -92,6 +92,11 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(ufoEntity).scale = 10;
     game.ecs.Get<Sprite>(ufoEntity).z = 0.1;
     
+    Collider ufoCol;
+    ufoCol.x=10;
+    ufoCol.y=10;
+    game.ecs.SetComponent<Collider>(ufoEntity, ufoCol);
+    
 
 
     // //make entity with sprite "beam.png"
@@ -117,6 +122,13 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(beamEntity) = game.resources.GetSprite("beam.png");
     game.ecs.Get<Sprite>(beamEntity).scale = 0;
     game.ecs.Get<Sprite>(beamEntity).z = 0.9;
+
+    Collider beamCol;
+    beamCol.x=0;
+    beamCol.y=0;  
+    //game.ecs.SetComponent<Collider>(beamEntity, beamCol);
+    
+    //start with "no" collider for now. later will want a tag maybe? or negative huge numbers for colliders. (for colllision toggling?)
 
 
 
@@ -145,6 +157,11 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(cowEntity).z = 0.5;
 
     //game.ecs.Get<Sprite>(myEntity).position.x = 50;
+
+    Collider cowCol;
+    cowCol.x=10;
+    cowCol.y=10;
+    game.ecs.SetComponent<Collider>(cowEntity, cowCol);
 
 
     game.RunGameLoop(test_callback);

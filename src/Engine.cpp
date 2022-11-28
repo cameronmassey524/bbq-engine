@@ -26,6 +26,7 @@ void Engine::Startup()
     sound.Startup();
     resources.Startup();
     scripting.Startup();
+    collisions.Startup();
 
 }
 
@@ -37,6 +38,7 @@ void Engine::Shutdown()
     sound.Shutdown();
     resources.Shutdown();
     scripting.Shutdown();
+    collisions.Shutdown();
 }
 
 void Engine::preciseSleep(double seconds) {
@@ -92,6 +94,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         input.Update();
         callback(*this);
         scripting.Update();
+        collisions.Update();
         graphics.Draw();
 
 

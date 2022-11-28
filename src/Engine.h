@@ -7,6 +7,7 @@
 #include "EntityManager.h"
 #include "Types.h"
 #include "ScriptManager.h"
+#include "CollisionManager.h"
 
 namespace bbq
 {
@@ -19,6 +20,7 @@ namespace bbq
             EntityManager ecs;
             ResourceManager resources;
             ScriptManager scripting;
+            CollisionManager collisions;
 
             void Startup();
 
