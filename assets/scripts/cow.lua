@@ -1,4 +1,5 @@
 local entity = ...
+space = false
 
 if (KeyIsDown(68))
 then
@@ -20,3 +21,8 @@ then
     --down
     GetPosition(entity).y = GetPosition(entity).y - 2.5
 end
+if (KeyIsDown(32)) then
+    --space
+    space = false
+end
+ 

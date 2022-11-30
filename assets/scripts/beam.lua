@@ -13,6 +13,7 @@ else
 end
 
 if (KeyIsDown(32)) then
+    --space
     GetSprite(entity).scale = 50;
 else
     GetSprite(entity).scale = 0;

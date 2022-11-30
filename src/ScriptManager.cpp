@@ -86,13 +86,25 @@ void ScriptManager::Startup()
         sol::constructors<Script()>(),
         "name", &Script::name
         );
+
+    lua.new_enum("STATE",
+        "idle", idle,
+        "runLeft", runLeft,
+        "runRight", runRight,
+        "jump", jump
+    );
     
     lua.set_function( "KeyIsDown", [&]( const int keycode ) { return game.input.KeyIsPressed( keycode ); } );
 
     lua.set_function( "PlaySound", [&]( const string name ) { return game.sound.PlaySound( name ); } );
     lua.set_function( "LoadSound", [&]( const std::string& name, const std::string& path) { return game.sound.LoadSound( name, path ); } );
 
-    lua.set_function( "CreateEntity", [&]( Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp ) { return game.ecs.Create( pos, vel, grav, health, sc, sp ); } );
+    lua.set_function( "CreateEntity", [&]( Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp ) { 
+        return game.ecs.Create( pos, vel, grav, health, sc, sp ); } );
+
+    lua.set_function("CreatePlayer", [&](Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp, State st) { 
+        return game.ecs.CreatePlayer(pos, vel, grav, health, sc, sp, st); });
+
     lua.set_function( "DestroyEntity", [&]( const EntityID entity ) { return game.ecs.Destroy( entity ); } );
 
     //Old functions
@@ -109,6 +121,7 @@ void ScriptManager::Startup()
     lua.set_function( "GetGravity", [&]( const EntityID e ) -> Gravity& { return game.ecs.Get<Gravity>(e); } );
     lua.set_function( "GetScript", [&]( const EntityID e ) -> Script& { return game.ecs.Get<Script>(e); } );
     lua.set_function( "GetHealth", [&]( const EntityID e ) -> Health& { return game.ecs.Get<Health>(e); } );
+    lua.set_function("GetState", [&](const EntityID e) -> State& { return game.ecs.Get<State>(e); });
 
     
 

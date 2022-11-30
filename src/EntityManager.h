@@ -79,6 +79,24 @@ namespace bbq
                 return CurrentID;
             }
 
+            EntityID CreatePlayer(Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp, State st)
+            {
+                //currently requires user to specify all components. Thus foreach will just iterate all maps.
+                //Not going to worry about re-using entities IDs or wrapping past 2^64 (or 2^32) # entities
+                static EntityID CurrentID = -1;
+                CurrentID += 1;
+
+                GetAppropriateSparseSet<Position>().insert({ CurrentID, pos });
+                GetAppropriateSparseSet<Velocity>().insert({ CurrentID, vel });
+                GetAppropriateSparseSet<Gravity>().insert({ CurrentID, grav });
+                GetAppropriateSparseSet<Health>().insert({ CurrentID, health });
+                GetAppropriateSparseSet<Script>().insert({ CurrentID, sc });
+                GetAppropriateSparseSet<Sprite>().insert({ CurrentID, sp });
+                GetAppropriateSparseSet<State>().insert({ CurrentID, st });
+
+                return CurrentID;
+            }
+
             EntityID Create()
             {
                 //currently requires user to specify all components. Thus foreach will just iterate all maps.

@@ -91,7 +91,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         //game loop stuff
         input.Update();
         callback(*this);
-        scripting.Update();
+        scripting.Update(); //run script on each sprite
         graphics.Draw();
 
 
