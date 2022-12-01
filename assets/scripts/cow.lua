@@ -1,14 +1,14 @@
 local entity = ...
 space = false
 
-if (KeyIsDown(262))
+if (KeyIsDown(68))
 then
     --right
-    GetPosition(entity).x = GetPosition(entity).x + 1
-elseif (KeyIsDown(263))
+    GetPosition(entity).x = GetPosition(entity).x + 2.5
+elseif (KeyIsDown(65))
 then
     --left
-    GetPosition(entity).x = GetPosition(entity).x - 1
+    GetPosition(entity).x = GetPosition(entity).x - 2.5
 end
 if (KeyIsDown(87))
 then

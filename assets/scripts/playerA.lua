@@ -27,11 +27,11 @@ if (curr == "right") then
     
     if (GetState(entity).timer < 50) then
         if (KeyIsDown(46)) then --period
-            ChangeSprite(entity, "rangercat.png")
+            ChangeSprite(entity, "attack.png")
             PlaySound("vine.wav")
             GetState(entity).timer = 120
         else
-            ChangeSprite(entity, "towerRight.png")
+            ChangeSprite(entity, "run_right.png")
         end
     end
 
@@ -41,18 +41,18 @@ elseif (curr == "left") then
 
     if (GetState(entity).timer < 50) then
         if (KeyIsDown(44)) then --comma
-            ChangeSprite(entity, "ufo.png")
+            ChangeSprite(entity, "block.png")
             PlaySound("vine.wav")
             GetState(entity).timer = 120
         else
-            ChangeSprite(entity, "towerLeft.png")
+            ChangeSprite(entity, "run_left.png")
         end
     end
 
 else
     --do nothing
-    if (GetState(entity).timer < 0 and GetSprite(entity).name ~= "tower.png") then
-        ChangeSprite(entity, "tower.png")
+    if (GetState(entity).timer < 0 and GetSprite(entity).name ~= "idle.png") then
+        ChangeSprite(entity, "idle.png")
     end
 end
 
