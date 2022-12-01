@@ -7,6 +7,7 @@ namespace bbq
     class CollisionManager
     {
         private:
+            int funnyTimer;
         
         public:
             void Startup();

@@ -53,6 +53,7 @@ int main( int argc, const char* argv[] ) {
     game.Startup();
     game.sound.LoadSound("hitsound.wav","assets/sounds/");
     game.sound.LoadSound("vine.wav", "assets/sounds/");
+    game.sound.LoadSound("bruh.wav", "assets/sounds/");
     
     game.graphics.LoadAnImage("rangercat.png", "assets/sprites/");
     game.graphics.LoadAnImage("cow.png", "assets/sprites/");
@@ -78,7 +79,7 @@ int main( int argc, const char* argv[] ) {
     game.scripting.LoadScript("beam.lua","assets/scripts/");
     game.scripting.LoadScript("cow.lua","assets/scripts/");
     game.scripting.LoadScript("playerA.lua", "assets/scripts/");
-    game.scripting.LoadScript("default.lua", "assets/scripts/");
+    game.scripting.LoadScript("playerB.lua", "assets/scripts/");
 
 
     //EntityID myEntity = game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
@@ -122,10 +123,11 @@ int main( int argc, const char* argv[] ) {
     EntityID enemyEntity = game.ecs.Create();
     game.ecs.Get<Position>(enemyEntity).y = 0;
     game.ecs.Get<Position>(enemyEntity).x = 50;
-    game.ecs.Get<Script>(enemyEntity).name = "default.lua";
-    game.ecs.Get<Sprite>(enemyEntity) = game.resources.GetSprite("enemy_block.png");
+    game.ecs.Get<Script>(enemyEntity).name = "playerB.lua";
+    game.ecs.Get<Sprite>(enemyEntity) = game.resources.GetSprite("ufo.png");
     game.ecs.Get<Sprite>(enemyEntity).scale = 20;
     game.ecs.Get<Sprite>(enemyEntity).z = 0.5;
+    game.ecs.Get<State>(fighterEntity).cur = "idle";
 
     Collider enemyCol;
     enemyCol.x=20;

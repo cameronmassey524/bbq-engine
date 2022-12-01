@@ -3,21 +3,21 @@ space = false
 
 if (KeyIsDown(68))
 then
-    --right
+    --right (d)
     GetPosition(entity).x = GetPosition(entity).x + 2.5
 elseif (KeyIsDown(65))
 then
-    --left
+    --left (a)
     GetPosition(entity).x = GetPosition(entity).x - 2.5
 end
 if (KeyIsDown(87))
 then
-    --up
+    --up (w)
     GetPosition(entity).y = GetPosition(entity).y + 2.5
 end
 if (KeyIsDown(83))
 then
-    --down
+    --down (s)
     GetPosition(entity).y = GetPosition(entity).y - 2.5
 end
 if (KeyIsDown(32)) then

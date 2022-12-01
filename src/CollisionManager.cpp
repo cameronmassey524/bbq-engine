@@ -48,9 +48,15 @@ bool CollisionManager::BoxCollide(EntityID e1, EntityID e2)
             //vertical overlap also, collision is true
 
             //std::cout << "A collision was detected\n";
-            game.sound.PlaySound("hitsound.wav");
+            //printf("collision");
+            if (funnyTimer < 0) {
+                game.sound.PlaySound("hitsound.wav");
+                printf("Play Sound: hitsound.wav\n");
+                funnyTimer = 60;
+            }
             return true;
         }
+        funnyTimer -= 1;
         //else no collision, continue
     }
     //else no collision

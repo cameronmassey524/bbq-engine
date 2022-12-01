@@ -2,14 +2,14 @@ local entity = ...
 t = 25
 move = 1
 
-if (KeyIsDown(262)) then
-    --right
+if (KeyIsDown(68)) then
+    --right (d)
     GetState(entity).cur = "right"
     if (GetState(entity).timer < t) then
         GetState(entity).timer = t
     end
-elseif (KeyIsDown(263)) then
-    --left
+elseif (KeyIsDown(65)) then
+    --left (a)
     GetState(entity).cur = "left"
     if (GetState(entity).timer < t) then
         GetState(entity).timer = t
@@ -26,8 +26,9 @@ if (curr == "right") then
     GetPosition(entity).x = GetPosition(entity).x + move
     
     if (GetState(entity).timer < 50) then
-        if (KeyIsDown(46)) then --period
+        if (KeyIsDown(71)) then --G
             ChangeSprite(entity, "attack.png")
+            --print("Play Sound: vine.wav")
             PlaySound("vine.wav")
             GetState(entity).timer = 120
         else
@@ -40,8 +41,9 @@ elseif (curr == "left") then
     GetPosition(entity).x = GetPosition(entity).x - move
 
     if (GetState(entity).timer < 50) then
-        if (KeyIsDown(44)) then --comma
+        if (KeyIsDown(70)) then --F
             ChangeSprite(entity, "block.png")
+            --print("Play Sound: vine.wav")
             PlaySound("vine.wav")
             GetState(entity).timer = 120
         else
