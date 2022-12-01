@@ -31,7 +31,7 @@ namespace bbq {
     struct Health { real percent; };
     struct Script { string name; };
     struct Collider {real x, y;};
-    struct State { string cur; int depth = 0; };
+    struct State { string cur; int timer = 0; };
 
     typedef long EntityID;
 

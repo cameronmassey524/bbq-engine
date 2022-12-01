@@ -90,7 +90,8 @@ void ScriptManager::Startup()
     //State
     lua.new_usertype<State>("State",
         sol::constructors<State()>(),
-        "cur", &State::cur
+        "cur", &State::cur,
+        "timer", &State::timer
         );
 
     /* State Enum (removed for now)
@@ -112,6 +113,8 @@ void ScriptManager::Startup()
 
     lua.set_function( "DestroyEntity", [&]( const EntityID entity ) { return game.ecs.Destroy( entity ); } );
 
+    lua.set_function("ChangeSprite", [&](const EntityID entity, const string name) { return ChangeSprite(entity, name); });
+
     //Old functions
     //lua.set_function( "GetSprite", [&]( const EntityID entity ) { return game.ecs.Get<Sprite>( entity ); } );
     //lua.set_function( "GetPosition", [&]( const EntityID entity ) { return game.ecs.Get<Position>( entity ); } );
@@ -131,6 +134,16 @@ void ScriptManager::Startup()
     
 
     lua.set_function( "GetSpriteResource", [&]( const std::string name) { return game.resources.GetSprite( name ); } );
+}
+
+void ScriptManager::ChangeSprite(const EntityID e, const string name)
+{
+    Sprite sp = game.ecs.Get<Sprite>(e);
+
+    game.ecs.Get<Sprite>(e) = game.resources.GetSprite(name);
+    game.ecs.Get<Sprite>(e).position = sp.position;
+    game.ecs.Get<Sprite>(e).scale = sp.scale;
+    game.ecs.Get<Sprite>(e).z = sp.z;
 }
 
 void ScriptManager::Shutdown()

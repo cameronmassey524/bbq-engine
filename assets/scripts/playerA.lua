@@ -17,11 +17,16 @@ curr = GetState(entity).cur
 if (curr == "right") then
     --right
     GetPosition(entity).x = GetPosition(entity).x + 2.5
+    ChangeSprite(entity, "towerRight.png")
 elseif (curr == "left") then
     --left
     GetPosition(entity).x = GetPosition(entity).x - 2.5
+    ChangeSprite(entity, "towerLeft.png")
 else
     --do nothing
+    if (GetSprite(entity).name ~= "tower.png") then
+        ChangeSprite(entity, "tower.png")
+    end
 end
 
 

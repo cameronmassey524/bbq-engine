@@ -58,6 +58,8 @@ int main( int argc, const char* argv[] ) {
     game.graphics.LoadAnImage("beam.png", "assets/sprites/");
     game.graphics.LoadAnImage("ufo.png", "assets/sprites/");
     game.graphics.LoadAnImage("tower.png", "assets/sprites/");
+    game.graphics.LoadAnImage("towerLeft.png", "assets/sprites/");
+    game.graphics.LoadAnImage("towerRight.png", "assets/sprites/");
 
     game.scripting.LoadScript("test_script.lua", "assets/scripts/");
     game.scripting.LoadScript("spacebar_script.lua", "assets/scripts/");
