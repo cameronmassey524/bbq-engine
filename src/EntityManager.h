@@ -80,6 +80,12 @@ namespace bbq
                 return CurrentID;
             }
 
+            template <typename T>
+            void SetComponent(EntityID e, T component)
+            {
+                GetAppropriateSparseSet<T>().insert({e, component});
+            }
+            
             EntityID Create()
             {
                 //currently requires user to specify all components. Thus foreach will just iterate all maps.

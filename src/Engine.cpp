@@ -26,6 +26,7 @@ void Engine::Startup()
     sound.Startup();
     resources.Startup();
     scripting.Startup();
+    collisions.Startup();
 
 }
 
@@ -37,6 +38,7 @@ void Engine::Shutdown()
     sound.Shutdown();
     resources.Shutdown();
     scripting.Shutdown();
+    collisions.Shutdown();
 }
 
 void Engine::preciseSleep(double seconds) {
@@ -91,7 +93,8 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         //game loop stuff
         input.Update();
         callback(*this);
-        scripting.Update(); //run script on each sprite
+        scripting.Update();//run script on each sprite
+        collisions.Update();//check all collidable entities for collision
         graphics.Draw();
 
 

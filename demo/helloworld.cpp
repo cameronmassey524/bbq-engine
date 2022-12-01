@@ -72,22 +72,6 @@ int main( int argc, const char* argv[] ) {
     game.scripting.LoadScript("playerA.lua", "assets/scripts/");
 
 
-    // //make entity with sprite "ufo.png"
-    // Position myPos;
-    // myPos.y = 50;
-    // myPos.x = 0;
-    // Velocity myVel;
-    // Gravity myGrav;
-    // Health myHealth;
-    // Script myScript;
-    // //myScript.name = "scroll_x.lua";
-    // //myScript.name = "shrink_sprite.lua";
-    // myScript.name = "ufo.lua";
-    // Sprite mySprite = game.resources.GetSprite("ufo.png"); // mySprite becomes a copy of the sprite at location
-    // //mySprite.scale = 1 + std::rand() % 100;
-    // mySprite.scale = 10;
-    // mySprite.z = 0.1;
-
     //EntityID myEntity = game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
     /*
     EntityID ufoEntity = game.ecs.Create();
@@ -97,6 +81,10 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(ufoEntity) = game.resources.GetSprite("ufo.png");
     game.ecs.Get<Sprite>(ufoEntity).scale = 10;
     game.ecs.Get<Sprite>(ufoEntity).z = 0.1;
+    Collider ufoCol;
+    ufoCol.x=10;
+    ufoCol.y=10;
+    game.ecs.SetComponent<Collider>(ufoEntity, ufoCol);
     */
 
     EntityID towerPlayer = game.ecs.Create();
@@ -124,6 +112,11 @@ int main( int argc, const char* argv[] ) {
     // //done making entity components. (currently all required)
     // EntityID beamEntity = game.ecs.Create(beamPos, beamVel, beamGrav, beamHealth, beamScript, beamSprite);
 
+    
+
+    
+
+
 
     EntityID beamEntity = game.ecs.Create();
     game.ecs.Get<Position>(beamEntity).y = 0;
@@ -133,24 +126,13 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(beamEntity).scale = 0;
     game.ecs.Get<Sprite>(beamEntity).z = 0.9;
 
+    //Collider beamCol;
+    //beamCol.x=0;
+    //beamCol.y=0;  
+    //game.ecs.SetComponent<Collider>(beamEntity, beamCol);
 
+    //start with "no" collider for now. later will want a tag maybe? or negative huge numbers for colliders. (for colllision toggling?)
 
-    //make entity with sprite "cow.png"
-    // Position cowPos;
-    // cowPos.y = 0;
-    // cowPos.x = 0;
-    // Velocity cowVel;
-    // Gravity cowGrav;
-    // Health cowHealth;
-    // Script cowScript;
-    // cowScript.name = "cow.lua";
-    // Sprite cowSprite = game.resources.GetSprite("cow.png"); // mySprite becomes a copy of the sprite at location
-    // cowSprite.scale = 10;
-    // cowSprite.z = 0.5;
-
-    // //done making entity components. (currently all required)
-    // EntityID cowEntity = game.ecs.Create(cowPos, cowVel, cowGrav, cowHealth, cowScript, cowSprite);
-    
     EntityID cowEntity = game.ecs.Create();
     game.ecs.Get<Position>(cowEntity).y = 0;
     game.ecs.Get<Position>(cowEntity).x = 0;
@@ -161,7 +143,14 @@ int main( int argc, const char* argv[] ) {
 
     //game.ecs.Get<Sprite>(myEntity).position.x = 50;
 
-    
+
+
+    Collider cowCol;
+    cowCol.x=10;
+    cowCol.y=10;
+    game.ecs.SetComponent<Collider>(cowEntity, cowCol);
+
+
     game.RunGameLoop(test_callback);
 
     return 0;
