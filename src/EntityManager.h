@@ -55,7 +55,7 @@ namespace bbq
             //end component index stuff
 
             
-            EntityID Create(Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp)
+            EntityID Create(Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp, State st)
             {
                 //currently requires user to specify all components. Thus foreach will just iterate all maps.
                 //Not going to worry about re-using entities IDs or wrapping past 2^64 (or 2^32) # entities
@@ -69,6 +69,7 @@ namespace bbq
                 GetAppropriateSparseSet<Health>().insert({CurrentID, health});
                 GetAppropriateSparseSet<Script>().insert({CurrentID, sc});
                 GetAppropriateSparseSet<Sprite>().insert({CurrentID, sp});
+                GetAppropriateSparseSet<State>().insert({ CurrentID, st });
                 // Get<Position>(CurrentID) = pos;
                 // Get<Velocity>(CurrentID) = vel;
                 // Get<Gravity>(CurrentID) = grav;
@@ -107,6 +108,7 @@ namespace bbq
                 Sprite sprite;
                 //mySprite.scale = 10;
                 //mySprite.z = 0.1;
+                State state{"none"};
 
                 
                 GetAppropriateSparseSet<Position>().insert({CurrentID, pos});
@@ -115,6 +117,7 @@ namespace bbq
                 GetAppropriateSparseSet<Health>().insert({CurrentID, health});
                 GetAppropriateSparseSet<Script>().insert({CurrentID, script});
                 GetAppropriateSparseSet<Sprite>().insert({CurrentID, sprite});
+                GetAppropriateSparseSet<State>().insert({ CurrentID, state });
                 // Get<Position>(CurrentID) = pos;
                 // Get<Velocity>(CurrentID) = vel;
                 // Get<Gravity>(CurrentID) = grav;

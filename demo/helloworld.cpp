@@ -52,11 +52,15 @@ int main( int argc, const char* argv[] ) {
     // Engine game;
     game.Startup();
     game.sound.LoadSound("hitsound.wav","assets/sounds/");
+    game.sound.LoadSound("vine.wav", "assets/sounds/");
     
     game.graphics.LoadAnImage("rangercat.png", "assets/sprites/");
     game.graphics.LoadAnImage("cow.png", "assets/sprites/");
     game.graphics.LoadAnImage("beam.png", "assets/sprites/");
     game.graphics.LoadAnImage("ufo.png", "assets/sprites/");
+    game.graphics.LoadAnImage("tower.png", "assets/sprites/");
+    game.graphics.LoadAnImage("towerLeft.png", "assets/sprites/");
+    game.graphics.LoadAnImage("towerRight.png", "assets/sprites/");
 
     game.scripting.LoadScript("test_script.lua", "assets/scripts/");
     game.scripting.LoadScript("spacebar_script.lua", "assets/scripts/");
@@ -65,9 +69,11 @@ int main( int argc, const char* argv[] ) {
     game.scripting.LoadScript("ufo.lua","assets/scripts/");
     game.scripting.LoadScript("beam.lua","assets/scripts/"); //not loading?
     game.scripting.LoadScript("cow.lua","assets/scripts/"); //not loading?
+    game.scripting.LoadScript("playerA.lua", "assets/scripts/");
 
 
     //EntityID myEntity = game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+    /*
     EntityID ufoEntity = game.ecs.Create();
     game.ecs.Get<Position>(ufoEntity).y = 50;
     game.ecs.Get<Position>(ufoEntity).x = 0;
@@ -75,12 +81,42 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(ufoEntity) = game.resources.GetSprite("ufo.png");
     game.ecs.Get<Sprite>(ufoEntity).scale = 10;
     game.ecs.Get<Sprite>(ufoEntity).z = 0.1;
-    
     Collider ufoCol;
     ufoCol.x=10;
     ufoCol.y=10;
     game.ecs.SetComponent<Collider>(ufoEntity, ufoCol);
+    */
+
+    EntityID towerPlayer = game.ecs.Create();
+    game.ecs.Get<Position>(towerPlayer).y = 25;
+    game.ecs.Get<Position>(towerPlayer).x = 0;
+    game.ecs.Get<Script>(towerPlayer).name = "playerA.lua";
+    game.ecs.Get<Sprite>(towerPlayer) = game.resources.GetSprite("tower.png");
+    game.ecs.Get<Sprite>(towerPlayer).scale = 10;
+    game.ecs.Get<Sprite>(towerPlayer).z = 0.45;
+    game.ecs.Get<State>(towerPlayer).cur = "idle";
+
+    // //make entity with sprite "beam.png"
+    // Position beamPos;
+    // beamPos.y = 0;
+    // beamPos.x = 0;
+    // Velocity beamVel;
+    // Gravity beamGrav;
+    // Health beamHealth;
+    // Script beamScript;
+    // beamScript.name = "beam.lua";
+    // Sprite beamSprite = game.resources.GetSprite("beam.png"); // mySprite becomes a copy of the sprite at location
+    // beamSprite.scale = 0;
+    // beamSprite.z = 0.9;
+
+    // //done making entity components. (currently all required)
+    // EntityID beamEntity = game.ecs.Create(beamPos, beamVel, beamGrav, beamHealth, beamScript, beamSprite);
+
     
+
+    
+
+
 
     EntityID beamEntity = game.ecs.Create();
     game.ecs.Get<Position>(beamEntity).y = 0;
@@ -90,9 +126,9 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(beamEntity).scale = 0;
     game.ecs.Get<Sprite>(beamEntity).z = 0.9;
 
-    Collider beamCol;
-    beamCol.x=0;
-    beamCol.y=0;  
+    //Collider beamCol;
+    //beamCol.x=0;
+    //beamCol.y=0;  
     //game.ecs.SetComponent<Collider>(beamEntity, beamCol);
 
     //start with "no" collider for now. later will want a tag maybe? or negative huge numbers for colliders. (for colllision toggling?)
@@ -106,6 +142,8 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(cowEntity).z = 0.5;
 
     //game.ecs.Get<Sprite>(myEntity).position.x = 50;
+
+
 
     Collider cowCol;
     cowCol.x=10;

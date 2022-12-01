@@ -21,8 +21,6 @@ namespace bbq {
     typedef glm::vec2 vec2;
     typedef glm::vec3 vec3;
 
-    
-
     //Entity Components
     //struct Position : public vec2 {};
     //struct Velocity : public vec2 {};
@@ -33,9 +31,13 @@ namespace bbq {
     struct Health { real percent; };
     struct Script { string name; };
     struct Collider {real x, y;};
+    struct State { string cur; int timer = 0; };
 
     typedef long EntityID;
 
     //sprite
     typedef struct { string image; real scale; vec2 position; real z; } Sprite;
+
+    
+
 }

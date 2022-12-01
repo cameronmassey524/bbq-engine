@@ -93,8 +93,8 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
         //game loop stuff
         input.Update();
         callback(*this);
-        scripting.Update();
-        collisions.Update();
+        scripting.Update();//run script on each sprite
+        collisions.Update();//check all collidable entities for collision
         graphics.Draw();
 
 

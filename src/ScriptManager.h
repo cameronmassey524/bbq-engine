@@ -26,5 +26,6 @@ namespace bbq
             //void RunScript(string name);
             void RunScript(string name, string args[]);
             void RunEntityScript(EntityID e);
+            void ChangeSprite(const EntityID e, const string name);
     };
 }

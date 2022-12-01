@@ -86,14 +86,34 @@ void ScriptManager::Startup()
         sol::constructors<Script()>(),
         "name", &Script::name
         );
+
+    //State
+    lua.new_usertype<State>("State",
+        sol::constructors<State()>(),
+        "cur", &State::cur,
+        "timer", &State::timer
+        );
+
+    /* State Enum (removed for now)
+    lua.new_enum("STATE",
+        "idle", idle,
+        "runLeft", runLeft,
+        "runRight", runRight,
+        "jump", jump
+    );
+    */
     
     lua.set_function( "KeyIsDown", [&]( const int keycode ) { return game.input.KeyIsPressed( keycode ); } );
 
     lua.set_function( "PlaySound", [&]( const string name ) { return game.sound.PlaySound( name ); } );
     lua.set_function( "LoadSound", [&]( const std::string& name, const std::string& path) { return game.sound.LoadSound( name, path ); } );
 
-    lua.set_function( "CreateEntity", [&]( Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp ) { return game.ecs.Create( pos, vel, grav, health, sc, sp ); } );
+    lua.set_function( "CreateEntity", [&]( Position pos, Velocity vel, Gravity grav, Health health, Script sc, Sprite sp, State st ) { 
+        return game.ecs.Create( pos, vel, grav, health, sc, sp, st ); } );
+
     lua.set_function( "DestroyEntity", [&]( const EntityID entity ) { return game.ecs.Destroy( entity ); } );
+
+    lua.set_function("ChangeSprite", [&](const EntityID entity, const string name) { return ChangeSprite(entity, name); });
 
     //Old functions
     //lua.set_function( "GetSprite", [&]( const EntityID entity ) { return game.ecs.Get<Sprite>( entity ); } );
@@ -109,10 +129,21 @@ void ScriptManager::Startup()
     lua.set_function( "GetGravity", [&]( const EntityID e ) -> Gravity& { return game.ecs.Get<Gravity>(e); } );
     lua.set_function( "GetScript", [&]( const EntityID e ) -> Script& { return game.ecs.Get<Script>(e); } );
     lua.set_function( "GetHealth", [&]( const EntityID e ) -> Health& { return game.ecs.Get<Health>(e); } );
+    lua.set_function( "GetState", [&](const EntityID e) -> State& { return game.ecs.Get<State>(e); });
 
     
 
     lua.set_function( "GetSpriteResource", [&]( const std::string name) { return game.resources.GetSprite( name ); } );
+}
+
+void ScriptManager::ChangeSprite(const EntityID e, const string name)
+{
+    Sprite sp = game.ecs.Get<Sprite>(e);
+
+    game.ecs.Get<Sprite>(e) = game.resources.GetSprite(name);
+    game.ecs.Get<Sprite>(e).position = sp.position;
+    game.ecs.Get<Sprite>(e).scale = sp.scale;
+    game.ecs.Get<Sprite>(e).z = sp.z;
 }
 
 void ScriptManager::Shutdown()
@@ -154,8 +185,17 @@ bool ScriptManager::LoadScript( const string& name, const string& path)
 
 void ScriptManager::RunScript(string name, string args[])
 {
+
+    if (script_load_map.count(name) == 0) {
+        LoadScript(name, "assets/scripts/");
+    }
+    //printf("Run script, %s\n", name.c_str());
+
     //std::cout << "RunscriptEnteredNotice\n";
     script_load_map[name]();
+
+
+
 }
 
 void ScriptManager::RunEntityScript(EntityID e)
