@@ -52,6 +52,7 @@ int main( int argc, const char* argv[] ) {
     // Engine game;
     game.Startup();
     game.sound.LoadSound("hitsound.wav","assets/sounds/");
+    game.sound.LoadSound("vine.wav", "assets/sounds/");
     
     game.graphics.LoadAnImage("rangercat.png", "assets/sprites/");
     game.graphics.LoadAnImage("cow.png", "assets/sprites/");

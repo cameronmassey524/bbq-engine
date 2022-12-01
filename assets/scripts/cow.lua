@@ -4,12 +4,11 @@ space = false
 if (KeyIsDown(262))
 then
     --right
-    GetPosition(entity).x = GetPosition(entity).x + 2.5
-end
-if (KeyIsDown(263))
+    GetPosition(entity).x = GetPosition(entity).x + 1
+elseif (KeyIsDown(263))
 then
     --left
-    GetPosition(entity).x = GetPosition(entity).x - 2.5
+    GetPosition(entity).x = GetPosition(entity).x - 1
 end
 if (KeyIsDown(87))
 then
