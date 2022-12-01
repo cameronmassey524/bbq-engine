@@ -1,6 +1,28 @@
 local entity = ...
 
 
+if (KeyIsDown(262)) then
+    --right
+    GetState(entity).cur = "right"
+elseif (KeyIsDown(263)) then
+    --left
+    GetState(entity).cur = "left"
+else
+    --do nothing
+    GetState(entity).cur = "idle"
+end
+
+curr = GetState(entity).cur
+
+if (curr == "right") then
+    --right
+    GetPosition(entity).x = GetPosition(entity).x + 2.5
+elseif (curr == "left") then
+    --left
+    GetPosition(entity).x = GetPosition(entity).x - 2.5
+else
+    --do nothing
+end
 
 
 --[[

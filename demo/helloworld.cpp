@@ -57,6 +57,7 @@ int main( int argc, const char* argv[] ) {
     game.graphics.LoadAnImage("cow.png", "assets/sprites/");
     game.graphics.LoadAnImage("beam.png", "assets/sprites/");
     game.graphics.LoadAnImage("ufo.png", "assets/sprites/");
+    game.graphics.LoadAnImage("tower.png", "assets/sprites/");
 
     game.scripting.LoadScript("test_script.lua", "assets/scripts/");
     game.scripting.LoadScript("spacebar_script.lua", "assets/scripts/");
@@ -65,6 +66,7 @@ int main( int argc, const char* argv[] ) {
     game.scripting.LoadScript("ufo.lua","assets/scripts/");
     game.scripting.LoadScript("beam.lua","assets/scripts/"); //not loading?
     game.scripting.LoadScript("cow.lua","assets/scripts/"); //not loading?
+    game.scripting.LoadScript("playerA.lua", "assets/scripts/");
 
 
     // //make entity with sprite "ufo.png"
@@ -84,6 +86,7 @@ int main( int argc, const char* argv[] ) {
     // mySprite.z = 0.1;
 
     //EntityID myEntity = game.ecs.Create(myPos, myVel, myGrav, myHealth, myScript, mySprite);
+    /*
     EntityID ufoEntity = game.ecs.Create();
     game.ecs.Get<Position>(ufoEntity).y = 50;
     game.ecs.Get<Position>(ufoEntity).x = 0;
@@ -91,8 +94,16 @@ int main( int argc, const char* argv[] ) {
     game.ecs.Get<Sprite>(ufoEntity) = game.resources.GetSprite("ufo.png");
     game.ecs.Get<Sprite>(ufoEntity).scale = 10;
     game.ecs.Get<Sprite>(ufoEntity).z = 0.1;
-    
+    */
 
+    EntityID towerPlayer = game.ecs.Create();
+    game.ecs.Get<Position>(towerPlayer).y = 25;
+    game.ecs.Get<Position>(towerPlayer).x = 0;
+    game.ecs.Get<Script>(towerPlayer).name = "playerA.lua";
+    game.ecs.Get<Sprite>(towerPlayer) = game.resources.GetSprite("tower.png");
+    game.ecs.Get<Sprite>(towerPlayer).scale = 10;
+    game.ecs.Get<Sprite>(towerPlayer).z = 0.45;
+    game.ecs.Get<State>(towerPlayer).cur = "idle";
 
     // //make entity with sprite "beam.png"
     // Position beamPos;
@@ -109,6 +120,7 @@ int main( int argc, const char* argv[] ) {
 
     // //done making entity components. (currently all required)
     // EntityID beamEntity = game.ecs.Create(beamPos, beamVel, beamGrav, beamHealth, beamScript, beamSprite);
+
 
     EntityID beamEntity = game.ecs.Create();
     game.ecs.Get<Position>(beamEntity).y = 0;
@@ -146,7 +158,7 @@ int main( int argc, const char* argv[] ) {
 
     //game.ecs.Get<Sprite>(myEntity).position.x = 50;
 
-
+    
     game.RunGameLoop(test_callback);
 
     return 0;
