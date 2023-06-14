@@ -8,12 +8,22 @@ Built with xmake and compiled with MSVC compiler
 
 ## What is the Engine?
 
-The `Engine` class is actually quite small and simple. Data-wise, it stores all the managers. All the managers get a reference to the engine so they can access each other. It takes some basic parameters as input (size of the window, whether to go full-screen, etc.). `Engine::Startup()` calls `Startup()` on the managers in the right order. `Engine::Shutdown()` does the same. `Engine` also runs the game loop.
+The `Engine` class is actually quite small and simple. It stores all the managers. All the managers get a reference to the engine so they can access each other. `Engine::Startup()` calls `Startup()` on the managers in the right order. `Engine::Shutdown()` does the same. `Engine` also runs the game loop.
+
+## Managers
+
+SoundManager: Uses SoLoud to manage and play audio resources. <br />
+GraphicsManager: Sets up GLFW to open windows and use sokol_gfx's OpenGL Backend. Loads and draws images. <br />
+InputManager: Uses GLFW To get keyboard input from the player. <br />
+EntityManager: Entity Component System which efficiently manages each objects position, velocity, gravity, health, sprite, scripts, and collider. <br />
+CollisionManager: Detects simple 2D box collision between entities with box collider components. <br />
+ResourceManager: Currently stores standalone sprites which are not attached to any game object. <br />
+ScriptManager: Uses sol to expose C++ Engine functionalities to Lua, allowing users to operate the engine from Lua. Also Loads and run scripts and entity script components. <br />
 
 ## Technology Used
 
-xmake:  https://xmake.io/#/
-sokol:  https://github.com/floooh/sokol
-GLFW:   https://www.glfw.org
-SoLoud: https://solhsa.com/soloud/
-sol:    https://github.com/ThePhD/sol2
+xmake:  https://xmake.io/#/ <br />
+sokol:  https://github.com/floooh/sokol <br />
+GLFW:   https://www.glfw.org <br />
+SoLoud: https://solhsa.com/soloud/ <br />
+sol:    https://github.com/ThePhD/sol2 <br />
