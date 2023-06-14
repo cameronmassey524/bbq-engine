@@ -8,7 +8,7 @@ Built with xmake and compiled with MSVC compiler
 
 ## What is the Engine?
 
-The `Engine` class is actually quite small and simple. Data-wise, it stores all the managers (they could be global variables or members of the `Engine` class). All the managers get a reference to the engine so they can access each other. It takes some basic parameters as input (size of the window, whether to go full-screen, etc.). `Engine::Startup()` calls `Startup()` on the managers in the right order. `Engine::Shutdown()` does the same. `Engine` also runs the game loop.
+The `Engine` class is actually quite small and simple. Data-wise, it stores all the managers. All the managers get a reference to the engine so they can access each other. It takes some basic parameters as input (size of the window, whether to go full-screen, etc.). `Engine::Startup()` calls `Startup()` on the managers in the right order. `Engine::Shutdown()` does the same. `Engine` also runs the game loop.
 
 ## Technology Used
 
