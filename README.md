@@ -12,12 +12,12 @@ The `Engine` class is actually quite small and simple. It stores all the manager
 
 ## Managers
 
-SoundManager: Uses SoLoud to manage and play audio resources. <br />
-GraphicsManager: Sets up GLFW to open windows and use sokol_gfx's OpenGL Backend. Loads and draws images. <br />
-InputManager: Uses GLFW To get keyboard input from the player. <br />
-EntityManager: Entity Component System which efficiently manages each objects position, velocity, gravity, health, sprite, scripts, and collider. <br />
-CollisionManager: Detects simple 2D box collision between entities with box collider components. <br />
-ResourceManager: Currently stores standalone sprites which are not attached to any game object. <br />
+SoundManager: Uses SoLoud to manage and play audio resources. <br /><br />
+GraphicsManager: Sets up GLFW to open windows and use sokol_gfx's OpenGL Backend. Loads and draws images. <br /><br />
+InputManager: Uses GLFW To get keyboard input from the player. <br /><br />
+EntityManager: Entity Component System which efficiently manages each objects position, velocity, gravity, health, sprite, scripts, and collider. <br /><br />
+CollisionManager: Detects simple 2D box collision between entities with box collider components. <br /><br />
+ResourceManager: Currently stores standalone sprites which are not attached to any game object. <br /><br />
 ScriptManager: Uses sol to expose C++ Engine functionalities to Lua, allowing users to operate the engine from Lua. Also Loads and run scripts and entity script components. <br />
 
 ## Technology Used
